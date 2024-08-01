@@ -1,19 +1,30 @@
-FROM ubuntu:latest AS  build
+# Etapa de build
+FROM maven:3.8.4-openjdk-17 AS build
 
-RUN apt-get update 
-RUN apt-get install openjdk-17-jdk -y
+# Define o diretório de trabalho
+WORKDIR /app
 
+# Copia o pom.xml e baixa as dependências
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
-COPY . .
+# Copia o código-fonte do projeto
+COPY src /app/src
 
-RUN apt-get install maven -y
+# Compila e empacota o aplicativo
+RUN mvn clean package -DskipTests
 
-RUN mvn clean install
-
+# Etapa de execução
 FROM openjdk:17-jdk-slim
 
+# Define o diretório de trabalho
+WORKDIR /app
+
+# Expõe a porta que o aplicativo Spring Boot usará
 EXPOSE 8080
 
-COPY --from=build /target/todolist-1.0.0-SNAPSHOT.jar app.jar
+# Copia o JAR construído da etapa de build
+COPY --from=build /app/target/blogPessoal-0.0.1-SNAPSHOT.jar app.jar
 
-ENTRYPOINT ["java", "-jar" , "app.jar"]
+# Define o comando para executar o JAR
+ENTRYPOINT ["java", "-jar", "app.jar"]
