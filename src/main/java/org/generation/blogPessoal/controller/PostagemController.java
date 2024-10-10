@@ -63,7 +63,7 @@ public class PostagemController {
 	  return ResponseEntity.status(HttpStatus.CREATED).body(postagemrepository.save(postagem));
   }
   
-  @PutMapping
+  @PutMapping("/atualizar")
   public ResponseEntity<Postagem> put (@Valid @RequestBody Postagem postagem){
 		
 		return postagemrepository.findById(postagem.getId())
