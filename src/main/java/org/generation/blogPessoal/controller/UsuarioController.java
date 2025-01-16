@@ -34,12 +34,12 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
-	@GetMapping("/all")
-	public ResponseEntity <List<Usuario>> getAll(){
-		return ResponseEntity.ok(usuarioRepository.findAll());	
-	}
-	
+		
+		@GetMapping("/all")
+		public ResponseEntity <List<Usuario>> getAll(){
+			return ResponseEntity.ok(usuarioRepository.findAll());	
+		}
+		
 	
 	@GetMapping("/{id}")
     public ResponseEntity<Usuario> getById(@PathVariable long id) {

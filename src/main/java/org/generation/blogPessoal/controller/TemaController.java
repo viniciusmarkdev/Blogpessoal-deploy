@@ -53,20 +53,31 @@ public class TemaController {
 	
 	@PutMapping
 	public ResponseEntity<Tema> put(@Valid @RequestBody Tema tema) {
-		return repository.findById(tema.getId())
-				.map(resposta -> ResponseEntity.ok().body(repository.save(tema)))
-				.orElse(ResponseEntity.notFound().build());  
-
+		
+		System.out.println("Tema recebido: " + tema);
+		return repository.findById(tema.getId()).map(resposta -> ResponseEntity.ok().body(repository.save(tema)))
+		.orElse(ResponseEntity.notFound().build());  
+		
 	}
 	
 	@DeleteMapping("/{id}")
 	  public ResponseEntity<?> deletePostagem(@PathVariable long id) {
 			
 			return repository.findById(id)
-					.map(resposta -> {
-						repository.deleteById(id);
+					.map(resposta -> { repository.deleteById(id);
+						
 						return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 					})
 					.orElse(ResponseEntity.notFound().build());
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

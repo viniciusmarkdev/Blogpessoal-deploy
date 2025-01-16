@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import static org.springframework.security.config.Customizer.withDefaults;
+
 
 @EnableWebSecurity
 public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -157,20 +157,4 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 			
 			
 	}
-	 
-	 
-	 
-	 
-	 
-	 
-	
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
 }

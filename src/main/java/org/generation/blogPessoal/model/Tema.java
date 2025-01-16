@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,11 +27,15 @@ public class Tema{
 		@Size(min = 1, max = 100, message = "O atributo deve conter no mínimo 1 carácter")
 		private String descricao;
 		
-		@OneToMany(mappedBy = "tema", cascade = CascadeType.ALL)
-		@JsonIgnoreProperties("tema")
+		@OneToMany(mappedBy = "tema", cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+	
 		private List<Postagem> postagem;
 		
-		
+		public Tema() {
+			
+		    // Construtor padrão necessário para o Jackson
+		}
+
 		
 		public long getId() {
 			return id;
